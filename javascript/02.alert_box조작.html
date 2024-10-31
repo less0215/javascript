@@ -1,0 +1,35 @@
+<!--
+[배운 것]
+
+1. css 파일과 연결
+2. alert_box를 보이게, 안 보이게 할 수 있게 됐음
+3. ui 만드는 순서
+    1. Html/CSS로 디자인 하기
+    2. 디자인 한 것 JS로 조작하기
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="02-1_alert_box조작.css"> 
+</head>
+<body>
+    <div class="alert_box" id="alert">알림창임</div>
+    <button onclick="showAlert()">버튼</button>
+    <br>
+    <button onclick="closeAlert()">닫기</button>
+
+    <script>
+        function showAlert() {
+            document.getElementById('alert').style.display = 'block';
+        }
+
+        function closeAlert() {
+            document.getElementById('alert').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
