@@ -1,0 +1,42 @@
+<!--
+
+- addEventListener를 사용하면 onclick 없이 순서대로 함수를 실행할 수 있다.
+- 함수가 파라미터에 있으면, 그 함수는 콜백함수라고 한다.
+    콜백함수는 순차적으로 실행할 때 쓰는 함수라고 생각하면 된다.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="alert-box", id="alert">
+        <p id="알림창">알림창임</p>
+        <button id = "닫기">닫기</button>
+        <button onclick="문구생성('아이디')" id="id&pw">아이디</button>
+        <button onclick="문구생성('비번')" id="id&pw2">비번</button>
+    </div>
+
+    <!-- 버튼1을 누르면 '아이디 입려하세요'
+    버튼2 누르면 '비번 입력하세요' -->
+
+    <!-- '닫기' 누르면 아이디, 비번 사라지게 만들기. -->
+    <script>
+        function 문구생성(종류) {
+            document.getElementById('알림창').innerHTML = 종류 +' 입력하세요';
+        }
+
+        document.getElementById('닫기').addEventListener('click', function(){
+            document.getElementById('id&pw').style.display = 'none';
+        });
+        
+        document.getElementById('닫기').addEventListener('click', function(){
+            document.getElementById('id&pw2').style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>

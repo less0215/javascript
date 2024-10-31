@@ -1,0 +1,33 @@
+<!--
+
+1. 함수 파라미터에는 한글을 써도 따옴표를 안 넣어도 된다.
+2. 그런데 호출하는 아규먼트 쪽에서는 한글을 쓸 시 따옴표를 써준다.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="alert-box", id="alert">
+        <p id="알림창">알림창임</p>
+        <button>닫기</button>
+        <button onclick="문구생성('아이디')">아이디</button>
+        <button onclick="문구생성('비번')">비번</button>
+    </div>
+
+    <!-- 버튼1을 누르면 '아이디 입려하세요'
+    버튼2 누르면 '비번 입력하세요' -->
+
+    <script>
+        function 문구생성(종류) {
+            document.getElementById('알림창').innerHTML = 종류 +' 입력하세요';
+        }
+    </script>
+</body>
+</html>
+
