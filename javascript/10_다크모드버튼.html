@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">JSShop</span>
+            <span class="badge bg-dark">Dark 🌙</span>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon">Dark</span>
+            </button>
+        </div>
+     </nav>
+
+     <!-- 버튼 클릭 홀수면 light로 변경
+     버튼 클릭 짝수면 dark로 변경 -->
+
+     <script>
+
+        var clickcount = 0;
+            
+        document.querySelector('.navbar-toggler-icon').addEventListener('click', function(){
+            clickcount++;
+            
+            if(clickcount % 2 === 1) { // 홀수일 때
+                document.querySelector('.navbar-toggler-icon').innerHTML = 'Light'
+            } else { // 짝수일 때
+                document.querySelector('.navbar-toggler-icon').innerHTML = 'Dark'
+            }
+        });
+     </script>
+    
+</body>
+</html>

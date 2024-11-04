@@ -1,0 +1,73 @@
+<!--
+
+else if는 '위 조건이 아니야? 그럼 이것도 검사해봐'라고 해석한다.
+else는 '위 조건이 다 아니야? 그럼 이 코드 실행해봐'라고 해석한다.
+
+
+>>>>>> 강의 듣기 또는 작성한 쿼리 깃허브에 저장하기
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="06_제이쿼리사용법.css">
+</head>
+<body>
+
+    <button class='btn_class' id="btn">버튼</button>
+
+    <div class="black-bg">
+        <div class="white-bg">
+          <h4>로그인하세요</h4>
+          <button class="btn btn-danger" id="close">닫기</button>
+          <form action="07_success.html">
+            <div class="my-3">
+              <input type="text" class="form-control">
+             </div>
+             <div class="my-3">
+               <input type="password" class="form-control">
+             </div>
+             <button type="submit" class="btn btn-primary" id="send">전송</button>
+             <button type="button" class="btn btn-danger" id="close">닫기</button>
+          </form>
+        </div>         
+      </div> 
+    
+      <script>
+        document.getElementById('btn').addEventListener('click', function(){
+          document.getElementsByClassName('black-bg')[0].classList.add('show');
+        });
+
+        document.getElementById('close').addEventListener('click', function(){
+          document.getElementsByClassName('black-bg')[0].classList.remove('show');
+        });
+        
+        document.getElementById('send').addEventListener('click',function(e){
+          e.preventDefault();
+
+          let form_data = document.getElementsByClassName('form-control');
+          
+          // 만약 아이디가 공백이면, 경고창 띄워.
+          // 위 조건이 아니야? 그럼 이것도 검사해봐.
+          // 비번이 공백이면, 경고창 띄워.
+          // 위 조건이 아니야? 그럼 이것도 검사해봐.
+          // 비번이 6자 미만이면, 경고창 띄워.
+          // 위 조건이 전부 아니야? 그럼 이 코드를 실행해
+          // 폼 제출
+
+          if(form_data[0].value == '') {
+            alert('아이디 입력해라');
+          } else if (form_data[1].value == '') {
+            alert('비번 입력해라');
+          } else if (form_data[1].value.length < 6) {
+            alert('비번 더 길게 입력해라');
+          } else {
+            document.getElementsByTagName('form')[0].submit();
+          }
+        });
+      </script>
+</body>
+</html>
