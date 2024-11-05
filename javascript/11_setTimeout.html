@@ -1,0 +1,49 @@
+<!--
+
+1. setInterval()은 계속해서 진행되기 때문에, 멈춰줘야 한다.
+    이때 멈추기 위해서는 setInterval()를 변수에 할당한다.
+        그래야만 setInterval()을 통제할 수 있기 때문이다.
+
+2. 'let count = 5;'를 타이머 안에 넣지 않는 이유는, setInterval()에 의해 1초에 한 번씩 실행 될 때마다 5가 되기 때문이다.
+    이는 숙제의 목적인 1씩 감소에 부적합 하기 때문에 1이 정상적으로 반복 감소 될 수 있도록 타이머 함수 밖에서 변수를 선언 하는 것이다.
+
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="alert alert-danger">
+        <span class="second">5</span>초 이내 구매시 사은품 증정!
+    </div>
+
+    <script>
+
+    const secondSpan = document.querySelector('.second');
+    let count = 5;
+
+    const timer = setInterval(타이머, 1000);
+
+    function 타이머(){
+        count --;
+
+        secondSpan.innerHTML = count;
+
+        // 0이 되면 셋인터벌을 멈추게 한다.
+
+        if(count <= 0) {
+            clearInterval(timer);
+
+            document.querySelector('.alert').style.display = 'none';
+        };
+    };
+
+    </script>
+</body>
+</html>
