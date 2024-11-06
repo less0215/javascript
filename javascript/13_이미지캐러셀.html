@@ -1,0 +1,87 @@
+<!-- 
+1. 함수 안에 기능을 넣을 때는 '발생하면 안 되는 상황'부터 넣는다.
+예를 들어 '다음' 버튼을 누를 때는 2번인 경우 발동 되면 안 되니깐, 이에 해당하는 코드를 작성한다.
+
+    만약 예외상황부터 작성하지 않는다면?
+        원하지 않은 상황(버그)가 발생할 수 있다. 예를 들어 빈 화면만 계속 보인다든다...
+
+
+2. '현재'라는 요소를 다루기 쉬운 방법은 전역 변수를 선언한 후에 함수 내에서 전역 변수를 활용하는 것이다.
+
+3. 스크롤을 숨기고 싶으면, 태그 안에 style="overflow: hidden"을 입력해 준다.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="13-113_이미지캐러셀.css">
+    <title>Document</title>
+</head>
+<body>
+    
+   <div style="overflow: hidden">
+    <div class="slide-container">
+        <div class="slide-box">
+            <img src="Car1.png" alt="">
+        </div>
+        <div class="slide-box">
+            <img src="Car2.png" alt="">
+        </div>
+        <div class="slide-box">
+            <img src="Car3.png" alt="">
+        </div>
+    </div>
+   </div> 
+    
+    
+    <button class="btn1">1번</button>
+    <button class="btn2">2번</button>
+    <button class="btn3">3번</button>
+    <!-- <button class="btn3">4번</button> -->
+    <br>
+    <br>
+    <button class="before">이전</button>
+    <button class="after">다음</button>
+
+    <script>
+        document.querySelector('.btn2').addEventListener('click', function(){
+            document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+        });
+        document.querySelector('.btn1').addEventListener('click', function(){
+            document.querySelector('.slide-container').style.transform = 'translateX(0vw)';
+        });
+        document.querySelector('.btn3').addEventListener('click', function(){
+            document.querySelector('.slide-container').style.transform = 'translateX(-200vw)';
+        });
+
+
+        let current_slide = 0;
+
+        document.querySelector('.after').addEventListener('click', function(){
+            // 에외상황(작동하면 안 되는 상황)부터 작성
+            if(current_slide >= 3){
+                return;
+            }
+
+            // 현재 위치 알기위해서 슬라이드 위치 명시
+            current_slide++;
+
+            // 작동 기능
+            document.querySelector('.slide-container').style.transform = `translateX(${current_slide * -100}vw)`;
+        });
+
+        document.querySelector('.before').addEventListener('click', function(){
+            if(current_slide <= 0){
+                return;
+            }
+
+            current_slide--;
+            document.querySelector('.slide-container').style.transform = `translateX(${current_slide *-100}vw)`;
+        });
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,76 @@
+<!--
+-
+    인자로 true, False를 넣으면, 해당 값을 포함한 함수 내에서는 인자가 어떤 것이느냐에 따라 조건문 실행 결과가 달라진다.
+
+    함수 내에 조건문이 있다면, true일 경우에만 조건문이 실행된다.
+
+    그렇지 않고 False를 입력하면, 거짓이기 때문에 else가 실행된다.
+
+- 'toFixed(보여주고 싶은 자릿수)'를 할 경우, 문자열로 반환된다.
+    그래서 Number()로 한번 감싸줘야만 숫자가 된다.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- 1분을 초로 바꾸기
+    초로 바꾼 1분을 다른 초와 합치기
+    그리고 더하기 -->
+
+    <script>
+        function 함수(num1,num2){
+            var 초변환 = num1 * 60;
+            var 합산 = 초변환 + num2;
+            var 변환끝 = 합산 * 1000;
+            return console.log(변환끝);
+        };
+
+        console.log(함수(1,30))
+
+        
+
+        // 가격 입력하면 10% 할인 된 가격이 반환.
+        // 첫 구매 여부도 확인해야 함.
+        // 첫 구매이면, 1.5를 할인된 가격에서 더 빼주기.
+        
+        // 소수점 처리 안 한 경우
+        function 함수(숫자, 첫구매여부) {
+            var 할인금액 = 숫자 * 0.1;
+            var 할인된금액 = 숫자 - 할인금액;
+
+            if(첫구매여부){
+                return 할인된금액 - 1.5;
+            } else {
+                return 할인된금액;
+            }
+        };
+
+        console.log(함수(70, false));
+        console.log(함수(100, true));
+
+        // 소수점 처리한 경우
+        function 함수(숫자, 첫구매여부) {
+            var 할인금액 = 숫자 * 0.1;
+            var 할인된금액 = 숫자 - 할인금액;
+
+            if(첫구매여부){
+                return Number((할인된금액 - 1.5).toFixed(2));
+            } else {
+                return Number(할인된금액.toFixed(2));
+            }
+        };
+
+        console.log(함수(70.5, false));
+        console.log(함수(10.3, true));
+
+    </script>
+</body>
+</html>
+
