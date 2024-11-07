@@ -1,0 +1,74 @@
+<!--
+scrollTop    : 현재 스크롤된 위치 (위에서부터 얼마나 스크롤됐는지의 픽셀값)
+clientHeight : 현재 화면에 보이는 영역의 높이 (viewport의 높이)
+scrollHeight : 스크롤 가능한 전체 콘텐츠의 높이 (보이지 않는 영역 포함)
+
+- this를 활용하는 방법
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="15-1_스크롤이벤트.css">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">JSShop</span>
+            <span class="ms-auto mx-3 badge bg-dark">Dark 🌙</span>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div style="height: 1000px; background-color: #f0f0f0;">
+        <p>첫 번째 섹션</p>
+    </div>
+    <div style="height: 1000px; background-color: #e0e0e0;">
+        <p>두 번째 섹션</p>
+        <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
+          </div> 
+    </div>
+    <div style="height: 1000px; background-color: #d0d0d0;">
+        <p>세 번째 섹션</p>
+    </div>
+
+    <script>
+        // 페이지 스크롤 100px 내리면
+        // 로고 사이즈 작아지게
+        
+    window.addEventListener('scroll', function(){
+        if(window.scrollY >= 100) {
+            document.querySelector('.navbar-brand').style.fontSize = '20px';
+    } else {
+        document.querySelector('.navbar-brand').style.fontSize = '30px';
+    }
+    });
+
+    // 회원약관 박스 거의 끝까지 내리면
+    // 스크롤 alert 띄우기
+
+    document.querySelector('.lorem').addEventListener('scroll', function(){
+        // 약관 박스의 스크롤양
+        var 약관박스스크롤양 = document.querySelector('.lorem').scrollTop;
+        // 눈에 보이는 스크롤 높이
+        var 눈에보이는스크롤높이 = document.querySelector('.lorem').clientHeight;
+        // 실제 높이
+        var 실제높이 = document.querySelector('.lorem').scrollHeight;
+        
+        if(약관박스스크롤양 + 눈에보이는스크롤높이 > 실제높이 - 10){
+            alert('다 내림');
+        };
+    });
+    
+    
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,7 @@
+.black_box {
+    position: fixed;
+    background-color: black;
+    color: azure;
+    width: 0%;
+    transition: width 0.1s;
+}

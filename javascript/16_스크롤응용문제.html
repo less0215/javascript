@@ -1,0 +1,42 @@
+<!--
+현재 스크롤 높이는 두 가지로 표현 가능
+    window.scrollY
+    document.querySelector().scrollTop
+scrollHeight는 '브라우저 전체 높이. 눈에 보이지 않는 영역까지 포함한'
+innerHeight는 '브라우저 전체 높이. 단, 눈에 보이는 영역까지의 높이.'
+
+스크롤 진행 상황을 알기 위해서는 (현재스크롤 높이 / 진행정도) * 100;
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="16_스크롤응용문제.css">
+</head>
+<body>
+    <div class="black_box">진행상황</div>
+
+    <div style="height: 2000px; background-color: #d0d0d0;">
+        <p>테스트 섹션</p>
+    </div>
+
+    <script>
+
+        window.addEventListener('scroll', function(){
+            var 박스 = document.querySelector('.black_box');
+            var 진행정도 = document.querySelector('html').scrollHeight - innerHeight;
+            var 현재스크롤높이 = window.scrollY;
+            var 스크롤진행상황 = (현재스크롤높이 / 진행정도) * 100;
+
+            박스.style.width = 스크롤진행상황 + '%';
+        });
+    </script>
+
+</body>
+</html>
+
+
