@@ -1,0 +1,136 @@
+<!--
+
+js로 html 만들 때 주의할 점
+- 클래스나 html 내용을 한꺼번에 넣으려고 하지말자.
+    - '생성 -> 생성한 곳에 추가 -> 완성본 원하는 위치에 삽입' 순서로 하자.
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="21_select조작.css">
+</head>
+<body>
+    <form class="container my-5 form-group">
+        <p>상품선택</p>
+        <select class="form-select mt-2">
+          <option>모자</option>
+          <option>셔츠</option>
+          <option>바지</option>
+        </select>
+
+        <select class="form-select mt-2 form-hide">
+            <option>95</option>
+            <option>100</option>
+        </select>
+
+
+    </form>
+
+    <!-- 셔츠 고르면
+    사이즈 고를 수 있는 셀렉트박스 만들기 -->
+
+    <!-- 1. 박스 ui 만들어 놓기
+    2. css로 숨겨 놓기
+    3. 동작 구현하기 -->
+    
+    <!-- 셔츠 누르면
+    두번째 박스 보여줘라 -->
+
+    <script>
+
+        // select box를 하나 더 만들면 된다는 걸 몰랐을 때 작성한 코드
+        // function 셔츠선택(){
+        //     document.querySelector('.container2').style.display = 'block';
+        // };
+
+        // function 셔츠선택아님(){
+        //     document.querySelector('.container2').style.display = 'none';
+        // };
+
+        // document.querySelector('.form-select').addEventListener('change', function(){
+        //     if(this.value == '셔츠'){
+        //     셔츠선택()
+        // } else {
+        //     셔츠선택아님()
+        // };
+        // });
+
+
+        // select box를 하나 더 만듦. 시맨틱 태그에 맞게 작성한 코드
+        function 셔츠선택(){
+            document.querySelector('.form-hide').style.display = 'block';
+        };
+
+        function 셔츠선택아님(){
+            document.querySelector('.form-hide').style.display = 'none';
+        };
+
+        document.querySelector('.form-select').addEventListener('change', function(){
+            if(this.value == '셔츠'){
+            셔츠선택()
+        } else {
+            셔츠선택아님()
+        };
+        });
+
+        // 바지 선택하면 바지 사이즈 선택할 수 있는 ui가 나오게 하기
+            // 단, 미리 html 만들지 말고, js로 html 만들기
+
+        
+        function 선택(){
+            document.querySelector('.form-hide').style.display = 'block';
+        };
+
+        function 선택아님(){
+            document.querySelector('.form-hide').style.display = 'none';
+        };            
+
+        let 사이즈28 = document.createElement('option').innerHTML = 28;
+        let 사이즈30 = document.createElement('option').innerHTML = 30;
+
+        // 찾아서
+        // 조건에 맞으면, 넣는다.
+        // 조건은 '바지' 선택시
+
+        document.querySelector('.form-select').addEventListener('change', function(){
+            
+            if(this.value === '바지'){
+                // 셀렉트 태그 만들기
+                let 바지선택 = document.createElement('select');
+                바지선택.classList.add('pants', 'form-select', 'mt-2');
+
+                // 셀렉트 태그 안에 들어갈 옵션 태그 만들기
+                let 바지사이즈28 = document.createElement('option');
+                바지사이즈28.innerHTML = 28;
+
+                let 바지사이즈30 = document.createElement('option');
+                바지사이즈30.innerHTML = 30;
+
+                // 셀랙트 태그 안에 옵션 추가하기
+                바지선택.appendChild(바지사이즈28);
+                바지선택.appendChild(바지사이즈30);
+
+                // 만들어진 태그 폼 그룹에 넣기
+                document.querySelector('.form-group').appendChild(바지선택);
+            };
+            
+            if(this.value != '바지'){
+                document.querySelector('.pants').remove();
+            };
+            
+                
+            
+        });
+    </script>
+
+</body>
+</html>
+
+

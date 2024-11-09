@@ -1,0 +1,66 @@
+<!--
+
+Array와 Object 자료형
+
+Array 생성
+  var 생성 = ['내용', '내용2', '내용3'];           
+Array 읽기
+  생성[0], 생성[1]...
+Array 수정
+  생성[0] = 새로운 내용;
+
+Object 생성
+  var 생성 = {이름 : '내용1', 이름 : '내용2'};
+    내용에다가만 따옴표를 감싼다!!
+Object 읽기
+  1. 생성[이름]
+  2. 생성.이름
+    둘다 가능. 근데 Array랑 구분 짓기 위해서 .으로 접근하는 방식이 나은 듯
+Object 수정
+  생성.이름 = 변경 내용;
+
+두개의 차이점 뭔데?
+
+1. 이름 지정 유무
+  어레이는 이름을 따로 못 지정함.
+  그래서 여러개 내용 저장할 때는 불리함.
+  오브젝트는 반대 특성 가짐.
+2. 순서 유뮤
+   오브젝트는 순서가 없음.
+   어레이는 순서가 있음.
+   그래서 내용 한 곳에 꾸겨 넣고 뭐 찾을 때는 오브젝트가 좋음.
+   왜? 오브젝트는 이름을 기억하는 거고, 어레이는 순서 자체를 기억해야 하니깐.
+   인간이라면 이름 기억하는게 더 쉽겠지.
+
+   근데 순서 없을 때는 자르기, 정렬도 됨.
+   생성.slice(1,3); 첫 번째부터 두번째까지 잘라줌
+   생성.sort(); 정렬가능
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="card p-3">
+          <span class = "car">상품명</span>
+          <span class = 'price'>가격</span>
+        </div>
+      </div> 
+      
+      <script>
+        var car2 = { name : '소나타', price : [50000, 3000, 4000] } 
+
+        var 자동차 = car2.name
+        var 가격 = car2.price
+
+        document.querySelector('.car').innerHTML = 자동차;
+        document.querySelector('.price').innerHTML = 가격;
+      </script>
+</body>
+</html>
+
