@@ -1,0 +1,51 @@
+<!-- 
+1. style에 여러개 값 입력할 때는 쌍따옴표로 감싸준다.
+    각 속성은 세미콜론으로 구분지어 준다.
+    <body style = "background-color: grey; height: 3000px">
+
+2. Lorem 치면 더미 텍스트 나온다
+
+3.'style="clear : both"'는 float의 left, right를 모두 해제하는 속성
+
+4. float는 요소를 원하는 곳에 배치하게 해주는 속성
+
+5. position: sticky;는 스크롤 할 부모 요소가 있어야 작동한다.
+        부모 요소를 벗어나는 순간, sticky는 해제된다.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="28_애플CSS.css">
+</head>
+<body style = "background-color: grey; height: 3000px">
+    <!-- 그레이 컬러에 높이 3000px 화면 바디 태그에 적용
+
+    div 박스 생성. grey 클래스명 가진.
+        grey 박스 안에 image 클래스명 가진 div 박스 하나 생성
+            image 박스 안에 애플이미지 불러와서 위드스 100% 적용
+        grey 박스 안에 text 클래스명 가진 div 박스 생성 -->
+    <div class="grey">
+        <div class="image">
+            <img src="appletv.jpg" alt="애플이미지" width="100%">
+        </div>
+        <div class = 'text'>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores, aperiam. Nostrum alias deleniti error id distinctio. Quam officiis sapiente, voluptatibus vero fugiat dolor ipsum maxime unde quos asperiores, cum dolores!
+        </div>
+        <div style="clear : both"></div>
+        <div class = 'text'>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores, aperiam. Nostrum alias deleniti error id distinctio. Quam officiis sapiente, voluptatibus vero fugiat dolor ipsum maxime unde quos asperiores, cum dolores!
+        </div>
+        <div style="clear : both"></div>
+        <div class = 'text'>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores, aperiam. Nostrum alias deleniti error id distinctio. Quam officiis sapiente, voluptatibus vero fugiat dolor ipsum maxime unde quos asperiores, cum dolores!
+        </div>
+        <div style="clear : both"></div>
+    </div>
+</body>
+</html>
+
+

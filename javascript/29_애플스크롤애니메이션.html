@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="29_애플CSS.css">
+</head>
+<body>
+    <div class="card-background">
+        <div class="card-box">
+            <img src="card1.png" alt="애플이미지1">
+        </div>
+        <div class="card-box">
+            <img src="card2.png" alt="애플이미지2">
+        </div>
+        <div class="card-box">
+            <img src="card3.png" alt="애플이미지3">
+        </div>
+    </div>
+
+    <script>
+
+            // 카드2,3이 카드1 자리에 왔을 때쯤
+            // 카드2와 3도 카드1처럼 오파시티와 스케일이 변하려면?
+            
+            // 카드2와 3의 시작점과 끝점을 구하면 된다.
+            // 대표로 카드2만 구해보자.
+            
+            // 카드2의 시작점, 대충 1200이지 않을까?
+            //     왜냐하면 카드1 끝점이 1200이니깐.
+            // 그럼 카드2의 끝점은 얼마일까?
+            //     카드1을 참고하면, 1800이지 않을까?
+            // 그럼 카드3의 시작점은 얼마일까?
+            //     카드2를 참고하면, 카드3의 시작점은 카드2의 끝점과 같지 않을까?
+            //     카드3의 끝점은 카드3의 시작점에 600을 더한 값이고?
+            // 이러한 결과를 수식으로 만들면?
+            //     카드1 시작점 == 600
+            //     카드1 끝점 == 1200
+
+            //     카드2 시작점 == 1200
+            //     카드2 끝점 == 1800 
+
+            //     카드3 시작점 == 1800
+            //     카드3 끝점 == 2400
+            // 시작점과 끝점을 카드가 바뀔 때마다 600씩 증가시키게 하면 되지 않을까?
+            
+            // 수정 전 식(카드1에 대해서만)
+            //     let 시작점(=현재스크롤높이) = 600
+            //     let 끝점 = 1200
+            //     let y = (-1/600 * 현재스크롤높이) + 2;
+            // 수정 후 식(모든 카드에 대해서)
+            //     let 시작점(=현재스크롤높이) = 600 + (i * 600);  //* i는 0부터 정수 1씩 증가*/
+            //     let 끝점 = 1200 + (i + 600)
+            //     let y = (-1/600 * (현재스크롤높이 - 시작점)) + 2; //* '(현재스크롤높이 - 시작점)'이런 식을 쓴 이유는 0을 만들기 위해서. 카드1도 시작점이 0이었으니깐.
+
+            
+            document.addEventListener('scroll', function(){
+                //  카드전체모음 변수에 저장
+                    // 왜? 카드전체에 적용할거니깐.
+                let 카드전체모음 = document.querySelectorAll('.card-box');
+
+                // 현재스크롤높이 변수에 저장
+                    // 왜? 시작점 끝점을 알기 위해서
+                let 현재스크롤높이 = window.scrollY;
+
+                // 카드전체모음에 있는 것들을 한 개씩 계산
+
+                카드전체모음.forEach(function(카드, i){
+                    let 시작점 = 600 + (i * 500);
+                    let 끝점 = 1200 + (i * 500);
+
+                    // opacity 계산 
+                    let y = (-1/600) * (현재스크롤높이 - 시작점) + 1;
+                    
+                    // scale 계산
+                    let newy = (-1/6000) * (현재스크롤높이 - 시작점) + 1;
+
+                    // opacity와 scale 값이 범위를 벗어나지 않도록 제한
+                    if (현재스크롤높이 < 시작점) {
+                        y = 1;
+                        newy = 1;
+                    } else if (현재스크롤높이 > 끝점) {
+                        y = 0;
+                        newy = 0.9;
+                    }
+
+                    카드.style.opacity = y;
+                    카드.style.transform = `scale(${newy})`;
+                });
+                
+            });
+        
+     </script>
+
+</body>
+</html>

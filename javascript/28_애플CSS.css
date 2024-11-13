@@ -1,0 +1,27 @@
+.grey {
+    /* 배경 lightgrey
+    높이 2000px
+    마진탑 500px */
+    background-color: lightgrey;
+    height: 2000px;
+    margin-top: 500px;
+}
+
+.text {
+    /* 플롯 왼쪽으로
+    좌우 300px */
+    float: left;
+    width: 300px; 
+    margin-top: 300px;
+}
+
+.image {
+    /* 플롯 오른쪽으로
+    좌우 300px
+    포지션 스틱키
+    탑 100px */
+    float: right;
+    width: 300px;
+    position: sticky;
+    top: 100px;
+}

@@ -1,0 +1,19 @@
+.card-background {
+    height: 3000px;
+    margin-top: 800px;
+    margin-bottom: 1600px;
+  }
+  
+.card-box img {
+display: block;  /** 마진 오토를 사용하기 위해서 블럭레벨 지정 */
+margin: auto; /** 좌우 여백을 자동으로 계산해서 가운데 정렬하는 기능*/
+max-width: 80%; /** 최대 너비를 80%로 제한. 여기에 마진 오토 적용하면, 80% 너비 제한 속에서 가운데 정렬됨.*/
+}
+
+.card-box {
+position: sticky;
+top: 400px;
+margin-top: 200px;
+opacity: 1;
+transform: scale(1);
+}
