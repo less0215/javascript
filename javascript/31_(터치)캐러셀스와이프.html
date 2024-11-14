@@ -1,0 +1,136 @@
+<!--
+
+- 'clientWidth'는 패딩 값을 포함한 전체 너비를 px 단위로 알 수 있는 속성
+- ${} 값에 연산을 하려면 {여기다가 추가로 연산}
+- 무언가 상태가 변할 때마다 다른 기능을 구현하고 싶으면, 전역변수를 지정해서 코드를 구현할 생각을 해보자.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="30_캐러셀스와이프.css">
+</head>
+<body>
+    <div style="overflow: hidden">
+        <div class="slide-container" >
+          <div class="slide-box" >
+            <img src="car1.png" draggable="false">
+          </div>
+          <div class="slide-box" >
+            <img src="car2.png" draggable="false">
+          </div>
+          <div class="slide-box" >
+            <img src="car3.png" draggable="false">
+          </div>
+        </div>
+    </div> 
+
+    <script>
+    /* 드래그 기능 구현 순서 정리
+    1. mousedown으로 마우스 클릭한 시작점을 저장한다
+    2. mousemove로 마우스 이동 거리를 계산한다 
+    - 이동거리 = (마우스 현재 위치 - 시작점)
+        왜 '(시작점 - 마우스 현재 위치)'가 아니라, '(마우스 현재 위치 - 시작점)로 계산?
+        이는 x좌표처럼 왼쪽은 음수, 오른쪽은 양수가 되도록 계산하도록 하기 위해서
+    3. 계산된 이동거리만큼 이미지를 translate로 이동시킨다
+    4. mouseup으로 드래그 종료를 감지한다
+    - 마우스를 떼면 '눌렀냐 = false'로 설정
+    - 이벤트는 전체 document에 걸어서 어디서 떼도 드래그가 끝나도록 함
+    만약 전체에 mouseup 이벤트를 걸지 않으면, 의도하지 않은 상황이 발생함.
+        예를 들어 slide-box에서 마우스를 클릭했다가 slide-box 밖에서 마우스를 떼면?
+            이 경우, mouseup으로 지정한 함수가 발동 안 함. 
+    5. 추가 기능: 마우스를 떼었을 때 조건에 따라 다음/이전 슬라이드로 이동
+    - 일정 거리(예: 100px) 이상 드래그하면 다음/이전 슬라이드로
+    - 그렇지 않으면 현재 슬라이드 유지
+    */
+    
+    // '드래그' 기능 구현을 위한 변수들
+    // 여러 함수에서 값을 공유하고 상태를 추적해야 하므로 전역변수로 선언
+    let 시작점 = 0;      // 드래그 시작할 때의 마우스 x좌표
+    let 이동거리 = 0;    // 마우스 이동한 거리 = (현재 마우스 위치 - 시작점)
+    let 눌렀냐 = false;  // 마우스가 눌린 상태인지 추적
+    let 사진위치 = 0;    // 현재 몇 번째 슬라이드인지 추적 (0, 1, 2)
+
+    // 1. 마우스 클릭한 시작점 저장
+    // container 전체에 이벤트를 걸어 모든 슬라이드에서 드래그 가능하게 함
+    document.querySelector('.slide-container').addEventListener('mousedown', function(e){
+    시작점 = e.clientX;
+    눌렀냐 = true;
+    });
+
+    // 2. 마우스 이동 거리 계산해서 이미지 이동시키기
+    document.addEventListener('mousemove', function(e){
+    if(눌렀냐 == true){
+        // 이동거리 = (끝점 - 시작점)으로 계산
+        // 이렇게 계산하는 이유: x좌표 개념 적용
+        // - 오른쪽으로 이동하면 양수 (끝점이 시작점보다 크므로)
+        // - 왼쪽으로 이동하면 음수 (끝점이 시작점보다 작으므로)
+        이동거리 = e.clientX - 시작점;
+        
+        // 현재 사진위치에서 이동거리만큼 추가로 이동
+        let boxWidth = document.querySelector('.slide-box').clientWidth;
+        document.querySelector('.slide-container').style.transform = 
+            `translate(${-사진위치 * boxWidth + 이동거리}px)`;
+    }
+    });
+
+    // 3. 마우스 떼면 드래그 종료하고 다음/이전 슬라이드 결정
+    document.addEventListener('mouseup', function(){
+    눌렀냐 = false;
+    let boxWidth = document.querySelector('.slide-box').clientWidth;
+
+    // 왼쪽으로 충분히 드래그 했으면서 마지막 사진이 아닐 때
+    if(이동거리 < -100 && 사진위치 < 2){
+        사진위치 += 1;  // 다음 사진으로
+    } 
+    // 오른쪽으로 충분히 드래그 했으면서 첫 사진이 아닐 때
+    else if(이동거리 > 100 && 사진위치 > 0){
+        사진위치 -= 1;  // 이전 사진으로
+    }
+
+    // 계산된 위치로 이동
+    document.querySelector('.slide-container').style.transform = 
+        `translate(-${boxWidth * 사진위치}px)`;
+    });
+
+    // 1. 터치 시작점 저장
+    document.querySelector('.slide-container').addEventListener('touchstart', function(e){
+        시작점 = e.touches[0].clientX;
+        눌렀냐 = true;
+    });
+
+    // 2. 터치 이동 거리 계산해서 이미지 이동시키기
+    document.addEventListener('touchmove', function(e){
+        if(눌렀냐 == true){
+            이동거리 = e.touches[0].clientX - 시작점;
+            
+            let boxWidth = document.querySelector('.slide-box').clientWidth;
+            document.querySelector('.slide-container').style.transform = 
+                `translate(${-사진위치 * boxWidth + 이동거리}px)`;
+        }
+    });
+
+    // 3. 터치 끝나면 드래그 종료하고 다음/이전 슬라이드 결정
+    document.addEventListener('touchend', function(){
+        눌렀냐 = false;
+        let boxWidth = document.querySelector('.slide-box').clientWidth;
+
+        if(이동거리 < -100 && 사진위치 < 2){
+            사진위치 += 1;
+        } 
+        else if(이동거리 > 100 && 사진위치 > 0){
+            사진위치 -= 1;
+        }
+
+        document.querySelector('.slide-container').style.transform = 
+            `translate(-${boxWidth * 사진위치}px)`;
+    });
+    </script>
+    
+</body>
+</html>
+
